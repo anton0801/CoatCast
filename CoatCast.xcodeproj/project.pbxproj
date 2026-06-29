@@ -6,11 +6,53 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8F4EFF632FF2613500703C4A /* AppsFlyerLib in Frameworks */ = {isa = PBXBuildFile; productRef = 8F4EFF622FF2613500703C4A /* AppsFlyerLib */; };
+		8F4EFF662FF2619A00703C4A /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8F4EFF652FF2619A00703C4A /* FirebaseCore */; };
+		8F4EFF682FF2619A00703C4A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8F4EFF672FF2619A00703C4A /* FirebaseMessaging */; };
+		8F4EFF742FF2628F00703C4A /* ServiceInAppCoat.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8F4EFF6D2FF2628F00703C4A /* ServiceInAppCoat.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8F4EFF7C2FF2629B00703C4A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8F4EFF7B2FF2629B00703C4A /* FirebaseMessaging */; };
+		8F4EFF922FF273D500703C4A /* codemagic.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 8F4EFF912FF273D500703C4A /* codemagic.yaml */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8F4EFF722FF2628F00703C4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EE38D5D72FD99A7A00AA8EFB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8F4EFF6C2FF2628F00703C4A;
+			remoteInfo = ServiceInAppCoat;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8F4EFF792FF2628F00703C4A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8F4EFF742FF2628F00703C4A /* ServiceInAppCoat.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		8F4EFF6D2FF2628F00703C4A /* ServiceInAppCoat.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ServiceInAppCoat.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F4EFF912FF273D500703C4A /* codemagic.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = codemagic.yaml; sourceTree = "<group>"; };
 		EE38D5DF2FD99A7A00AA8EFB /* CoatCast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoatCast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8F4EFF782FF2628F00703C4A /* Exceptions for "ServiceInAppCoat" folder in "ServiceInAppCoat" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8F4EFF6C2FF2628F00703C4A /* ServiceInAppCoat */;
+		};
 		EE38D5F42FD99AA300AA8EFB /* Exceptions for "CoatCast" folder in "CoatCast" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -21,6 +63,14 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		8F4EFF6E2FF2628F00703C4A /* ServiceInAppCoat */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8F4EFF782FF2628F00703C4A /* Exceptions for "ServiceInAppCoat" folder in "ServiceInAppCoat" target */,
+			);
+			path = ServiceInAppCoat;
+			sourceTree = "<group>";
+		};
 		EE38D5E12FD99A7A00AA8EFB /* CoatCast */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -32,20 +82,41 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8F4EFF6A2FF2628F00703C4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F4EFF7C2FF2629B00703C4A /* FirebaseMessaging in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EE38D5DC2FD99A7A00AA8EFB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F4EFF682FF2619A00703C4A /* FirebaseMessaging in Frameworks */,
+				8F4EFF662FF2619A00703C4A /* FirebaseCore in Frameworks */,
+				8F4EFF632FF2613500703C4A /* AppsFlyerLib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F4EFF7A2FF2629B00703C4A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EE38D5D62FD99A7A00AA8EFB = {
 			isa = PBXGroup;
 			children = (
+				8F4EFF912FF273D500703C4A /* codemagic.yaml */,
 				EE38D5E12FD99A7A00AA8EFB /* CoatCast */,
+				8F4EFF6E2FF2628F00703C4A /* ServiceInAppCoat */,
+				8F4EFF7A2FF2629B00703C4A /* Frameworks */,
 				EE38D5E02FD99A7A00AA8EFB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				EE38D5DF2FD99A7A00AA8EFB /* CoatCast.app */,
+				8F4EFF6D2FF2628F00703C4A /* ServiceInAppCoat.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +133,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8F4EFF6C2FF2628F00703C4A /* ServiceInAppCoat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F4EFF752FF2628F00703C4A /* Build configuration list for PBXNativeTarget "ServiceInAppCoat" */;
+			buildPhases = (
+				8F4EFF692FF2628F00703C4A /* Sources */,
+				8F4EFF6A2FF2628F00703C4A /* Frameworks */,
+				8F4EFF6B2FF2628F00703C4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8F4EFF6E2FF2628F00703C4A /* ServiceInAppCoat */,
+			);
+			name = ServiceInAppCoat;
+			packageProductDependencies = (
+				8F4EFF7B2FF2629B00703C4A /* FirebaseMessaging */,
+			);
+			productName = ServiceInAppCoat;
+			productReference = 8F4EFF6D2FF2628F00703C4A /* ServiceInAppCoat.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		EE38D5DE2FD99A7A00AA8EFB /* CoatCast */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EE38D5ED2FD99A7C00AA8EFB /* Build configuration list for PBXNativeTarget "CoatCast" */;
@@ -68,16 +163,21 @@
 				EE38D5DB2FD99A7A00AA8EFB /* Sources */,
 				EE38D5DC2FD99A7A00AA8EFB /* Frameworks */,
 				EE38D5DD2FD99A7A00AA8EFB /* Resources */,
+				8F4EFF792FF2628F00703C4A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8F4EFF732FF2628F00703C4A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				EE38D5E12FD99A7A00AA8EFB /* CoatCast */,
 			);
 			name = CoatCast;
 			packageProductDependencies = (
+				8F4EFF622FF2613500703C4A /* AppsFlyerLib */,
+				8F4EFF652FF2619A00703C4A /* FirebaseCore */,
+				8F4EFF672FF2619A00703C4A /* FirebaseMessaging */,
 			);
 			productName = CoatCast;
 			productReference = EE38D5DF2FD99A7A00AA8EFB /* CoatCast.app */;
@@ -90,9 +190,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1610;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
+					8F4EFF6C2FF2628F00703C4A = {
+						CreatedOnToolsVersion = 16.4;
+					};
 					EE38D5DE2FD99A7A00AA8EFB = {
 						CreatedOnToolsVersion = 16.1;
 					};
@@ -107,27 +210,47 @@
 			);
 			mainGroup = EE38D5D62FD99A7A00AA8EFB;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8F4EFF612FF2613500703C4A /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */,
+				8F4EFF642FF2619A00703C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EE38D5E02FD99A7A00AA8EFB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				EE38D5DE2FD99A7A00AA8EFB /* CoatCast */,
+				8F4EFF6C2FF2628F00703C4A /* ServiceInAppCoat */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		EE38D5DD2FD99A7A00AA8EFB /* Resources */ = {
+		8F4EFF6B2FF2628F00703C4A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EE38D5DD2FD99A7A00AA8EFB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F4EFF922FF273D500703C4A /* codemagic.yaml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8F4EFF692FF2628F00703C4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EE38D5DB2FD99A7A00AA8EFB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +260,73 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8F4EFF732FF2628F00703C4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8F4EFF6C2FF2628F00703C4A /* ServiceInAppCoat */;
+			targetProxy = 8F4EFF722FF2628F00703C4A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		8F4EFF762FF2628F00703C4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ServiceInAppCoat/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ServiceInAppCoat;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.coatcasted.CoatCast.ServiceInAppCoat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8F4EFF772FF2628F00703C4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ServiceInAppCoat/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ServiceInAppCoat;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.coatcasted.CoatCast.ServiceInAppCoat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		EE38D5EB2FD99A7C00AA8EFB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -269,8 +458,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoatCast/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Coat Cast";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Coat Cast uses the camera to photograph paint defects and before/after shots of your rooms.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Coat Cast lets you attach photos from your library to defect notes and before/after sets.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Coat Cast uses tracking data to improve app functionality, enhance performance, analyze user interaction with features, and support ongoing updates and optimization. This information also helps maintain app reliability, stability, and security while delivering a better overall user experience.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -281,7 +472,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coatcasted.CoatCast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -306,8 +497,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoatCast/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Coat Cast";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Coat Cast uses the camera to photograph paint defects and before/after shots of your rooms.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Coat Cast lets you attach photos from your library to defect notes and before/after sets.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Coat Cast uses tracking data to improve app functionality, enhance performance, analyze user interaction with features, and support ongoing updates and optimization. This information also helps maintain app reliability, stability, and security while delivering a better overall user experience.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -318,7 +511,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coatcasted.CoatCast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -334,6 +527,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8F4EFF752FF2628F00703C4A /* Build configuration list for PBXNativeTarget "ServiceInAppCoat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F4EFF762FF2628F00703C4A /* Debug */,
+				8F4EFF772FF2628F00703C4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EE38D5DA2FD99A7A00AA8EFB /* Build configuration list for PBXProject "CoatCast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -353,6 +555,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8F4EFF612FF2613500703C4A /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.18.0;
+			};
+		};
+		8F4EFF642FF2619A00703C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.15.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8F4EFF622FF2613500703C4A /* AppsFlyerLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F4EFF612FF2613500703C4A /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */;
+			productName = AppsFlyerLib;
+		};
+		8F4EFF652FF2619A00703C4A /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F4EFF642FF2619A00703C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		8F4EFF672FF2619A00703C4A /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F4EFF642FF2619A00703C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		8F4EFF7B2FF2629B00703C4A /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F4EFF642FF2619A00703C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EE38D5D72FD99A7A00AA8EFB /* Project object */;
 }

@@ -110,7 +110,7 @@ final class AppStore: ObservableObject {
 
     // MARK: Coats / Layer scheduler
 
-    func coats(for roomID: UUID) -> [Coat] {
+    func coats(for roomID: UUID) -> [CoatMain] {
         data.coats.filter { $0.roomID == roomID }.sorted { $0.index < $1.index }
     }
 
@@ -119,7 +119,7 @@ final class AppStore: ObservableObject {
         var existing = coats(for: room.id)
         // Primer coat
         if !existing.contains(where: { $0.isPrimer }) {
-            let primer = Coat(roomID: room.id, index: 0, isPrimer: true)
+            let primer = CoatMain(roomID: room.id, index: 0, isPrimer: true)
             data.coats.append(primer)
             existing.append(primer)
         }
@@ -128,7 +128,7 @@ final class AppStore: ObservableObject {
         let target = max(room.targetCoats, 1)
         if topCoats.count < target {
             for i in (topCoats.count + 1)...target {
-                data.coats.append(Coat(roomID: room.id, index: i))
+                data.coats.append(CoatMain(roomID: room.id, index: i))
             }
         } else if topCoats.count > target {
             // Trim trailing untouched coats only (never remove an applied one).
@@ -144,7 +144,7 @@ final class AppStore: ObservableObject {
     }
 
     /// Lowest-index pending coat for a room.
-    func nextApplicableCoat(for roomID: UUID) -> Coat? {
+    func nextApplicableCoat(for roomID: UUID) -> CoatMain? {
         coats(for: roomID).first { $0.status == .pending }
     }
 
@@ -158,7 +158,7 @@ final class AppStore: ObservableObject {
     }
 
     /// The coat currently drying for a room (if any).
-    func dryingCoat(for roomID: UUID, asOf now: Date) -> Coat? {
+    func dryingCoat(for roomID: UUID, asOf now: Date) -> CoatMain? {
         coats(for: roomID).first { $0.dryStartedAt != nil && !$0.isDry(asOf: now) }
     }
 
@@ -183,7 +183,7 @@ final class AppStore: ObservableObject {
                                 detail: "\(coat.label) applied in \(room.name)"))
     }
 
-    func revertCoat(_ coat: Coat) {
+    func revertCoat(_ coat: CoatMain) {
         notifications.cancel(id: coat.notificationID)
         var c = coat
         c.status = .pending

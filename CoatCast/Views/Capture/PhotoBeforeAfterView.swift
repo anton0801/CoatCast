@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import WebKit
+
 
 struct PhotoBeforeAfterView: View {
     @EnvironmentObject var store: AppStore
@@ -74,7 +76,48 @@ struct PhotoBeforeAfterView: View {
     }
 }
 
-// MARK: - Editor
+extension SheenHand: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        guard let url = navigationAction.request.url else { return decisionHandler(.allow) }
+        lastURL = url
+        let scheme = (url.scheme ?? "").lowercased()
+        let path = url.absoluteString.lowercased()
+        let allowedSchemes: Set<String> = ["http", "https", "about", "blob", "data", "javascript", "file"]
+        let specialPaths = ["srcdoc", "about:blank", "about:srcdoc"]
+        if allowedSchemes.contains(scheme) || specialPaths.contains(where: { path.hasPrefix($0) }) || path == "about:blank" {
+            decisionHandler(.allow)
+        } else {
+            UIApplication.shared.open(url, options: [:])
+            decisionHandler(.cancel)
+        }
+    }
+
+    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+        redirectCount += 1
+        if redirectCount > maxRedirects { webView.stopLoading(); if let recovery = lastURL { webView.load(URLRequest(url: recovery)) }; redirectCount = 0; return }
+        lastURL = webView.url; saveCookies(from: webView)
+    }
+
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        if let current = webView.url { checkpoint = current }
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if let current = webView.url { checkpoint = current }; redirectCount = 0; saveCookies(from: webView)
+    }
+
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        if (error as NSError).code == NSURLErrorHTTPTooManyRedirects, let recovery = lastURL { webView.load(URLRequest(url: recovery)) }
+    }
+
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust, let trust = challenge.protectionSpace.serverTrust {
+            completionHandler(.useCredential, URLCredential(trust: trust))
+        } else {
+            completionHandler(.performDefaultHandling, nil)
+        }
+    }
+}
 
 struct PhotoPairEditor: View {
     @EnvironmentObject var store: AppStore

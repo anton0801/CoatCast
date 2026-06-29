@@ -113,7 +113,7 @@ struct LayerSchedulerView: View {
         }
     }
 
-    private func activeTimerCard(coat: Coat, now: Date) -> some View {
+    private func activeTimerCard(coat: CoatMain, now: Date) -> some View {
         CardView(tint: Theme.drying) {
             HStack(spacing: 16) {
                 ProgressRing(progress: coat.progress(asOf: now), size: 64, lineWidth: 7, tint: Theme.drying)
@@ -129,7 +129,7 @@ struct LayerSchedulerView: View {
         }
     }
 
-    private func coatRow(_ coat: Coat, now: Date) -> some View {
+    private func coatRow(_ coat: CoatMain, now: Date) -> some View {
         let isDrying = coat.dryStartedAt != nil && !coat.isDry(asOf: now)
         return HStack(spacing: 12) {
             ZStack {
@@ -183,18 +183,18 @@ struct LayerSchedulerView: View {
         }
     }
 
-    private func statusColor(_ coat: Coat, now: Date) -> Color {
+    private func statusColor(_ coat: CoatMain, now: Date) -> Color {
         if coat.status == .done || coat.isDry(asOf: now) && coat.dryStartedAt != nil { return Theme.ready }
         if coat.dryStartedAt != nil { return Theme.drying }
         return Theme.textInactive
     }
-    private func statusText(_ coat: Coat, now: Date) -> String {
+    private func statusText(_ coat: CoatMain, now: Date) -> String {
         if coat.dryStartedAt != nil && (coat.status == .done || coat.isDry(asOf: now)) {
             return "Dry · done"
         }
         return "Pending"
     }
-    private func statusPill(_ coat: Coat, now: Date) -> some View {
+    private func statusPill(_ coat: CoatMain, now: Date) -> some View {
         let done = coat.dryStartedAt != nil && (coat.status == .done || coat.isDry(asOf: now))
         return TagChip(text: done ? "Done" : "Pending",
                        color: done ? Theme.ready : Theme.textInactive, filled: done)

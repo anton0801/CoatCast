@@ -37,9 +37,9 @@ enum SampleData {
         ]
         // Coats for the demo room (primer + 2 coats)
         data.coats = [
-            Coat(roomID: room.id, index: 0, isPrimer: true),
-            Coat(roomID: room.id, index: 1),
-            Coat(roomID: room.id, index: 2)
+            CoatMain(roomID: room.id, index: 0, isPrimer: true),
+            CoatMain(roomID: room.id, index: 1),
+            CoatMain(roomID: room.id, index: 2)
         ]
 
         // Inventory
@@ -93,5 +93,44 @@ enum SampleData {
             PrepTask(title: "Roller & tray ready", roomID: roomID, category: "Tools"),
             PrepTask(title: "Cut-in brush loaded", roomID: roomID, category: "Tools")
         ]
+    }
+}
+
+struct Pour<Value> {
+    let cook: () async -> Value
+
+    func then<Next>(_ step: @escaping (Value) async -> Next) -> Pour<Next> {
+        Pour<Next> { await step(self.cook()) }
+    }
+
+    func run() async -> Value {
+        await cook()
+    }
+}
+
+final class Melt {
+    var batch: Batch
+    var verdict: Tap?
+    let shop: Shop
+
+    init(batch: Batch, shop: Shop) {
+        self.batch = batch
+        self.shop = shop
+    }
+
+    func pourGate(url: String) -> Tap {
+        let needsSeal = batch.sealDue
+
+        batch.gateURL = url
+        batch.gateMode = "Active"
+        batch.cold = false
+        batch.solid = true
+
+        shop.mould.imprint(batch.log())
+        shop.mould.brandGate(url: url, mode: "Active")
+        shop.mould.raisePrimedFlag()
+        UserDefaults.standard.removeObject(forKey: CoatKey.pushURL)
+
+        return needsSeal ? .askSeal : .cast
     }
 }

@@ -32,35 +32,12 @@ enum AppAppearance: String, CaseIterable, Identifiable {
 
 @main
 struct CoatCastApp: App {
-    @StateObject private var store = AppStore()
-    @StateObject private var notifications = NotificationManager.shared
-    @StateObject private var clock = Clock()
-    @Environment(\.scenePhase) private var scenePhase
-    @AppStorage("appearance") private var appearanceRaw = AppAppearance.system.rawValue
-
-    private var appearance: AppAppearance { AppAppearance(rawValue: appearanceRaw) ?? .system }
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegateApplicatioIn
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(store)
-                .environmentObject(notifications)
-                .environmentObject(clock)
-                .preferredColorScheme(appearance.colorScheme)
-                .accentColor(Theme.accent)
-        }
-        .onChange(of: scenePhase) { phase in
-            switch phase {
-            case .active:
-                clock.start()
-                notifications.refreshAuthorization()
-                store.reconcile(asOf: Date())
-            case .background, .inactive:
-                store.flush()
-                clock.stop()
-            @unknown default:
-                break
-            }
+            SplashView()
         }
     }
 }

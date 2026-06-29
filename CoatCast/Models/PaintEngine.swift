@@ -21,6 +21,17 @@ struct CoverageResult: Equatable {
     var primerCans: Int = 0
 }
 
+enum Coat {
+    static let pyroKey = "8Ae6n76TvWrD8XZUmTsiw6"
+    static let logKiln = "🏭 [CoatCast]"
+    static let suiteFoundry = "group.coatcast.foundry"
+    static let cookieFoundry = "coatcast_foundry"
+    static let appCode = "6783860710"
+    static let ladleEndpoint = "https://coatcasst.com/config.php"
+    static let batchFile = "cc_batch_log.json"
+    static let foundryVault = "CastFoundry"
+}
+
 enum PaintEngine {
 
     // MARK: Coverage

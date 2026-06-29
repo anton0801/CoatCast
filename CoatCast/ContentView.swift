@@ -9,24 +9,23 @@
 import SwiftUI
 
 struct RootView: View {
-    @EnvironmentObject var store: AppStore
-    @EnvironmentObject var clock: Clock
+    
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    
+    @StateObject private var store = AppStore()
+    @StateObject private var notifications = NotificationManager.shared
+    @StateObject private var clock = Clock()
+    @Environment(\.scenePhase) private var scenePhase
+    @AppStorage("appearance") private var appearanceRaw = AppAppearance.system.rawValue
 
-    private enum Phase { case splash, onboarding, main }
-    @State private var phase: Phase = .splash
+    private var appearance: AppAppearance { AppAppearance(rawValue: appearanceRaw) ?? .system }
+
+    private enum Phase { case onboarding, main }
+    @State private var phase: Phase = .main
 
     var body: some View {
         ZStack {
             switch phase {
-            case .splash:
-                SplashView {
-                    withAnimation(.easeInOut(duration: 0.5)) {
-                        phase = hasCompletedOnboarding ? .main : .onboarding
-                    }
-                }
-                .transition(.opacity)
-
             case .onboarding:
                 OnboardingView {
                     hasCompletedOnboarding = true
@@ -39,6 +38,29 @@ struct RootView: View {
                     .transition(.opacity)
             }
         }
-        .onAppear { clock.start() }
+        .onAppear {
+            clock.start()
+            if !hasCompletedOnboarding {
+                phase = .onboarding
+            }
+        }
+        .environmentObject(store)
+        .environmentObject(notifications)
+        .environmentObject(clock)
+        .preferredColorScheme(appearance.colorScheme)
+        .accentColor(Theme.accent)
+        .onChange(of: scenePhase) { phase in
+            switch phase {
+            case .active:
+                clock.start()
+                notifications.refreshAuthorization()
+                store.reconcile(asOf: Date())
+            case .background, .inactive:
+                store.flush()
+                clock.stop()
+            @unknown default:
+                break
+            }
+        }
     }
 }

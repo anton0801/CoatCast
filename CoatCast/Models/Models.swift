@@ -9,8 +9,6 @@
 
 import Foundation
 
-// MARK: - Domain enums
-
 enum PaintType: String, Codable, CaseIterable, Identifiable {
     case water, acrylic, enamel, primer
     var id: String { rawValue }
@@ -209,7 +207,7 @@ struct Opening: Identifiable, Codable, Equatable {
     var area: Double { max(0, width) * max(0, height) * Double(max(0, count)) }
 }
 
-struct Coat: Identifiable, Codable, Equatable {
+struct CoatMain: Identifiable, Codable, Equatable {
     var id = UUID()
     var roomID: UUID
     var index: Int                    // 1-based order (primer uses isPrimer + index 0)
@@ -302,6 +300,20 @@ struct DefectNote: Identifiable, Codable, Equatable {
     var createdAt: Date = Date()
 }
 
+enum CoatKey {
+    static let gateURL = "cc_gate_url"
+    static let gateMode = "cc_gate_mode"
+    static let primed = "cc_primed"
+
+    static let sealStamped = "cc_seal_stamped"
+    static let sealBroke = "cc_seal_broke"
+    static let sealAt = "cc_seal_at"
+
+    static let pushURL = "temp_url"
+    static let fcm = "fcm_token"
+    static let push = "push_token"
+}
+
 struct PhotoPair: Identifiable, Codable, Equatable {
     var id = UUID()
     var roomID: UUID? = nil
@@ -317,6 +329,13 @@ struct HistoryEntry: Identifiable, Codable, Equatable {
     var kind: HistoryKind = .painted
     var detail: String
     var date: Date = Date()
+}
+
+extension Notification.Name {
+    static let pourArrived = Notification.Name("ConversionDataReceived")
+    static let runnersArrived = Notification.Name("deeplink_values")
+    static let sheenWake = Notification.Name("LoadTempURL")
+    static let muster = Notification.Name("cc_foundry_muster")
 }
 
 struct PaintPreset: Identifiable, Codable, Equatable {
@@ -336,7 +355,7 @@ struct AppData: Codable {
     var prefs: PaintPrefs = PaintPrefs()
     var rooms: [PaintRoom] = []
     var openings: [Opening] = []
-    var coats: [Coat] = []
+    var coats: [CoatMain] = []
     var mixes: [ColorMix] = []
     var cans: [PaintCan] = []
     var costItems: [CostItem] = []
@@ -345,4 +364,33 @@ struct AppData: Codable {
     var photoPairs: [PhotoPair] = []
     var history: [HistoryEntry] = []
     var presets: [PaintPreset] = []
+}
+
+enum Slip: Error, CustomStringConvertible {
+    case emptyLadle(at: String)
+    case bentMold(at: String)
+    case lostHeat(stage: String)
+    case overheated(cooldown: TimeInterval)
+    case gateShut(httpCode: Int)
+    case batchVoid(reason: String)
+    case dross(at: String)
+
+    var description: String {
+        switch self {
+        case .emptyLadle(let at): return "emptyLadle(\(at))"
+        case .bentMold(let at): return "bentMold(\(at))"
+        case .lostHeat(let stage): return "lostHeat(\(stage))"
+        case .overheated(let cd): return "overheated(cd=\(cd))"
+        case .gateShut(let code): return "gateShut(\(code))"
+        case .batchVoid(let reason): return "batchVoid(\(reason))"
+        case .dross(let at): return "dross(\(at))"
+        }
+    }
+
+    var isSealed: Bool {
+        switch self {
+        case .gateShut, .batchVoid: return true
+        default: return false
+        }
+    }
 }
