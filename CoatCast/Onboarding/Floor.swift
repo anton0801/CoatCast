@@ -81,6 +81,7 @@ final class Floor: ObservableObject {
     func networkConnectivityChanged(_ connected: Bool) {
         if !connected {
             showOfflineView = true
+            uiLocked = true
         }
     }
     

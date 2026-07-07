@@ -109,10 +109,6 @@ extension AppDelegate: AppsFlyerLibDelegate, DeepLinkDelegate {
     }
 
     func onConversionDataFail(_ error: Error) {
-        smelter.takePour([
-            "error": true,
-            "error_desc": error.localizedDescription
-        ])
     }
 
     func didResolveDeepLink(_ result: DeepLinkResult) {
