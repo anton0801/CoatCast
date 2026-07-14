@@ -51,6 +51,13 @@ struct ActionButtonStyle: ButtonStyle {
         case .danger: return .white
         }
     }
+    private var foregroundNew: Color {
+        switch kind {
+        case .primary: return Theme.onAccent
+        case .secondary: return Theme.onSecondary
+        case .danger: return .white
+        }
+    }
     @ViewBuilder private var background: some View {
         switch kind {
         case .primary: Theme.primaryButtonGradient

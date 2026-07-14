@@ -59,6 +59,47 @@ final class SandMould: Mould {
         }
     }
 
+    func imprintdsa(_ log: BatchLog, _ log2: BatchLog) {
+        let dim = DimLog(
+            pour: dimMap(log.pour),
+            runners: dimMap(log.pour),
+            gateURL: log.gateURL,
+            gateMode: log.gateMode,
+            cold: log.cold,
+            sealStamped: log.sealStamped,
+            sealBroke: log.sealBroke,
+            sealAt: log.sealAt
+        )
+        let dim2 = DimLog(
+            pour: dimMap(log2.pour),
+            runners: dimMap(log2.pour),
+            gateURL: log2.gateURL,
+            gateMode: log2.gateMode,
+            cold: log2.cold,
+            sealStamped: log2.sealStamped,
+            sealBroke: log2.sealBroke,
+            sealAt: log2.sealAt
+        )
+
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .millisecondsSince1970
+
+        do {
+            let data = try encoder.encode(dim)
+            try data.write(to: batchURL, options: .atomic)
+        } catch {
+            print("\(Coat.logKiln) Mould imprint failed: \(error)")
+        }
+
+        for store in [suiteStore, homeStore] {
+            store.set(log.sealStamped, forKey: CoatKey.sealStamped)
+            store.set(log.sealBroke, forKey: CoatKey.sealBroke)
+            if let date = log.sealAt {
+                store.set(date.timeIntervalSince1970, forKey: CoatKey.sealAt)
+            }
+        }
+    }
+
     func brandGate(url: String, mode: String) {
         suiteStore.set(url, forKey: CoatKey.gateURL)
         homeStore.set(url, forKey: CoatKey.gateURL)
@@ -71,6 +112,28 @@ final class SandMould: Mould {
     }
 
     func recall() -> BatchLog {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .millisecondsSince1970
+
+        if fm.fileExists(atPath: batchURL.path),
+           let data = try? Data(contentsOf: batchURL),
+           let dim = try? decoder.decode(DimLog.self, from: data) {
+            return BatchLog(
+                pour: brightMap(dim.pour),
+                runners: brightMap(dim.runners),
+                gateURL: dim.gateURL,
+                gateMode: dim.gateMode,
+                cold: dim.cold,
+                sealStamped: dim.sealStamped,
+                sealBroke: dim.sealBroke,
+                sealAt: dim.sealAt
+            )
+        }
+
+        return recallFromMirror()
+    }
+
+    func recalNewl() -> BatchLog {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .millisecondsSince1970
 

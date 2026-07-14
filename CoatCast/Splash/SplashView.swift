@@ -195,6 +195,7 @@ struct SplashView: View {
         logoIn = false
         exiting = false
     }
+    
     private func wireNetworkMonitoring() {
         networkMonitor.pathUpdateHandler = { path in
             Task { @MainActor in
